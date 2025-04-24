@@ -362,10 +362,10 @@ class WireguardConfiguration:
                 "PrivateKey": self.PrivateKey,
                 "Address": self.Address,
                 "ListenPort": self.ListenPort,
-                "PreUp": f"{self.PreUp}",
-                "PreDown": f"{self.PreDown}",
-                "PostUp": f"{self.PostUp}",
-                "PostDown": f"{self.PostDown}",
+                "PreUp": f"",
+                "PreDown": f"",
+                "PostUp": f"",
+                "PostDown": f"",
                 "SaveConfig": "true"
             }
             
@@ -1047,7 +1047,7 @@ class WireguardConfiguration:
         dataChanged = False
         with open(self.configPath, 'r') as f:
             original = [l.rstrip("\n") for l in f.readlines()]
-            allowEdit = ["Address", "PreUp", "PostUp", "PreDown", "PostDown", "ListenPort"]
+            allowEdit = ["Address", "ListenPort"]
             if self.Protocol == 'awg':
                 allowEdit += ["Jc", "Jmin", "Jmax", "S1", "S2", "H1", "H2", "H3", "H4"]
             start = original.index("[Interface]")
