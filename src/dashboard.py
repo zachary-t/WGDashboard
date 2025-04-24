@@ -1758,7 +1758,11 @@ class DashboardConfig:
             open(DASHBOARD_CONF, "x")
         self.__config = configparser.ConfigParser(strict=False)
         self.__config.read_file(open(DASHBOARD_CONF, "r+"))
-        self.hiddenAttribute = ["totp_key", "auth_req"]
+        self.hiddenAttribute = [
+            "totp_key", "auth_req", "wg_conf_path", "awg_conf_path", 
+            "app_prefix", "app_ip", "app_port", "auth_req", "version", 
+            "welcome_session", "username", "password", "enable_totp", "totp_verified"
+        ]
         self.__default = {
             "Account": {
                 "username": "admin",
@@ -1876,7 +1880,7 @@ class DashboardConfig:
     def __checkPassword(self, plainTextPassword: str, hashedPassword: bytes):
         return bcrypt.checkpw(plainTextPassword.encode("utf-8"), hashedPassword)
 
-    def SetConfig(self, section: str, key: str, value: any, init: bool = False) -> [bool, str]:
+    def SetConfig(self, section: str, key: str, value: any, init: bool = False) -> [bool, str]:    
         if key in self.hiddenAttribute and not init:
             return False, None
 
