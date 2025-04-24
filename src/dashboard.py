@@ -1881,8 +1881,10 @@ class DashboardConfig:
         return bcrypt.checkpw(plainTextPassword.encode("utf-8"), hashedPassword)
 
     def SetConfig(self, section: str, key: str, value: any, init: bool = False) -> [bool, str]:    
+        
+        # Safeguard for demo
         if key in self.hiddenAttribute and not init:
-            return False, None
+            return True, None
 
         if not init:
             valid, msg = self.__configValidation(section, key, value)
